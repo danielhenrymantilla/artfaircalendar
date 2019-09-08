@@ -25,6 +25,7 @@ class Calendar(object):
         found_later_event = False
         while not found_later_event:
             new_events = get_events(page_number)
+            page_number += 1
             for event in new_events:
                 if not event.is_valid():
                     continue
