@@ -27,6 +27,7 @@ class TestCalendar(unittest.TestCase):
     def test_write_ics(self):
         self.calendar.write_ics("test.ics")
         self.assertTrue(os.path.exists("test.ics"))
+        os.remove("test.ics")
 
 
 if __name__ == '__main__':

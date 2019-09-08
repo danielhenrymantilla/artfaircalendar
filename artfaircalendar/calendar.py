@@ -73,7 +73,7 @@ def get_events(page_number=1, per_page=100):
 
 def get_raw_json(page_number=1, per_page=100):
     filled_url = BASE_URL % (per_page, page_number)
-    filename = hashlib.sha512(filled_url.encode("utf-8")).hexdigest()
+    filename = hashlib.sha512(filled_url.encode("utf-8")).hexdigest() + ".tmp"
     if os.path.exists(filename):
         creation_time = os.stat(filename).st_ctime
         file_is_too_old = time.time() - creation_time > N_SECONDS_PER_DAY
