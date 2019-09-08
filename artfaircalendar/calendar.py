@@ -2,6 +2,7 @@ import json
 import os.path
 import time
 import urllib.request
+import urllib.error
 import hashlib
 
 import ics
@@ -25,6 +26,8 @@ class Calendar(object):
         found_later_event = False
         while not found_later_event:
             new_events = get_events(page_number)
+            if len(new_events) == 0:
+                break
             page_number += 1
             for event in new_events:
                 if not event.is_valid():
@@ -83,8 +86,13 @@ def get_raw_json(page_number=1, per_page=100):
                 return json.load(f)
         else:
             os.remove(filename)
-    with urllib.request.urlopen(filled_url) as url:
-        raw_json = json.loads(url.read().decode())
-        with open(filename, 'w') as f:
-            json.dump(raw_json, f)
-        return raw_json
+    try:
+        with urllib.request.urlopen(filled_url) as url:
+            raw_json = json.loads(url.read().decode())
+            with open(filename, 'w') as f:
+                json.dump(raw_json, f)
+            return raw_json
+    except urllib.error.HTTPError as e:
+        if e.code == 400:
+            return []
+        raise e

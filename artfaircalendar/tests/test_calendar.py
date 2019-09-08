@@ -10,7 +10,7 @@ from artfaircalendar.calendar import Calendar
 class TestCalendar(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.calendar = Calendar.from_end_date(datetime.datetime.now() + relativedelta(months=+3))
+        self.calendar = Calendar.from_end_date(datetime.datetime.now() + relativedelta(months=+12))
 
     def test_filter_by_city(self):
         city_name = "Paris"
