@@ -8,7 +8,7 @@ Transforms the data from the Art Fairs Service Website into an ICS calendar.
 git clone https://github.com/Aunsiels/artfaircalendar
 cd artfaircalendar
 pip3 install -r requirements.txt
-export PYTHONPATH=$PYTHONPATH:`pwd`
+export PYTHONPATH="$PYTHONPATH:`pwd`"
 ```
 
 ## Simple use case
